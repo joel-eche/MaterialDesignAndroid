@@ -1,30 +1,34 @@
 package edu.francis.android.materialtest;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-//import android.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+public class SubActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sub);
 
         toolbar=(Toolbar)findViewById(R.id.app_bar);
+        //toolbar.setTitle("SubActivity");
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_sub,menu);
         return true;
     }
 
@@ -35,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         if(id==R.id.action_settings){
             Toast.makeText(this,"Holo "+item.getTitle(),Toast.LENGTH_SHORT).show();
         }
-        if(id==R.id.navigate){
-            startActivity(new Intent(this,SubActivity.class));
+        if(id==android.R.id.home){
+            NavUtils.navigateUpFromSameTask(this);
         }
 
         return super.onOptionsItemSelected(item);
